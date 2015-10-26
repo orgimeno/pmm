@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Holaxlomenos</string>
+    <string name="app2_name">Pantalla Saludo</string>
+
+    <string name="saludo">Prueba de Saludo!</string>
+    <string name="escribe">Introduce TU NOMBRE</string>
+    <string name="pulsar">Pulsa Aqui</string>
+    <string name="volver">VOLVER Actividad Anterior</string>
+
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_pantall2">Pantall2</string>
+
+    <string name="hello_world">Hello world!</string>
+
+</resources>
