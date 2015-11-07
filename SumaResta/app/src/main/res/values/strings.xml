@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SumaResta</string>
+    <string name="action_settings">Settings</string>
+    <string name="operador1">Primer Operador:</string>
+</resources>
