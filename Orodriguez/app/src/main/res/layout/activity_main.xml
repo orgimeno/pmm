@@ -1,0 +1,133 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡¡ PIZZERIA ONLINE !!"
+        android:id="@+id/cartel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:background="#69BF74"
+        android:padding="20dp"
+        android:layout_marginTop="42dp" />
+
+    <ImageButton android:id="@+id/ImgFoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/logopizza"
+        android:contentDescription="@string/portada"
+        android:layout_marginBottom="304dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_toRightOf="@+id/totalValor"
+        android:layout_toEndOf="@+id/totalValor" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/totalValor"
+        android:layout_toLeftOf="@+id/totalValor">
+    </Spinner>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/spinner1"
+        android:layout_toEndOf="@+id/cartel"
+        android:id="@+id/radioGroup"
+        android:layout_above="@+id/queso"
+        android:layout_toRightOf="@+id/cartel">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En local"
+            android:id="@+id/local"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Envío Domicilio"
+            android:id="@+id/domicilio"
+            android:checked="false" />
+    </RadioGroup>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+Grande"
+        android:id="@+id/grande"
+        android:layout_below="@+id/spinner1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="38dp"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Ingred"
+        android:id="@+id/ingred"
+        android:layout_alignTop="@+id/grande"
+        android:layout_centerHorizontal="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Queso"
+        android:id="@+id/queso"
+        android:layout_alignTop="@+id/ingred"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:checked="false" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/unidades"
+        android:inputType="number"
+        android:layout_below="@+id/grande"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/radioGroup"
+        android:layout_toStartOf="@+id/radioGroup"
+        android:hint="Numero de unidades" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Pedido"
+        android:id="@+id/total"
+        android:layout_below="@+id/unidades"
+        android:layout_toLeftOf="@+id/ingred"
+        android:layout_toStartOf="@+id/ingred" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalValor"
+        android:text="$$$$"
+        android:layout_alignBottom="@+id/total"
+        android:layout_toRightOf="@+id/total" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/radioGroup"
+        android:layout_alignLeft="@+id/radioGroup"
+        android:layout_alignStart="@+id/radioGroup"></RadioGroup>
+</RelativeLayout>
