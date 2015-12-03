@@ -31,8 +31,8 @@ public class DibujoInicial extends Activity {
             Paint miPincel= new Paint();
             miPincel.setColor(Color.RED);
             miPincel.setStyle(Paint.Style.STROKE);
-            for (int i=0; i<200; i+=10)
-                lienzo.drawCircle(300+i,500,300,miPincel);
+            for (int i=0; i<500; i+=1)
+                lienzo.drawCircle(500,800,30+i,miPincel);
 
             Paint miPincel1= new Paint();
             miPincel1.setColor(Color.GREEN);
@@ -43,7 +43,7 @@ public class DibujoInicial extends Activity {
             }
 
             miPincel.setTextSize(60);
-            lienzo.drawText("MI CÍRCULO", 500, 900, miPincel);
+            lienzo.drawText("MI CÍRCULO", 400, 900, miPincel);
 
         }
     }
