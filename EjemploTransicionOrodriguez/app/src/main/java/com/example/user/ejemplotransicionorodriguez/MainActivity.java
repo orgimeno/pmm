@@ -18,10 +18,11 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ImageView imagen = new ImageView(this);
+        //ImageView imagen = (ImageView) findViewById(R.id.transicionId);
         setContentView(imagen);
         TransitionDrawable mi_transicion = (TransitionDrawable)
                 getResources().getDrawable(R.drawable.transicion);
         imagen.setImageDrawable(mi_transicion);
-        mi_transicion.startTransition(2000);
+        mi_transicion.startTransition(7000);
     }
 }
