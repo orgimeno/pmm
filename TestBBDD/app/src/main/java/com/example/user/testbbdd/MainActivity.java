@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         		String[] args3 = new String[]{"oscaryny"};
         		//Cursor c = bd.rawQuery("SELECT nombre,telefono FROM Clientes WHERE nombre=? ", args3);
 				Cursor c = bd.rawQuery("SELECT nombre,telefono FROM Clientes ",null);
-
+				bd.execSQL("Drop database DBClientes");
         		//Ejemplo Select2
         		String[] campos = new String[] {"nombre", "telefono"};
         		String[] args4 = new String[] {"cli1"};
