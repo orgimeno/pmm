@@ -24,26 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         //En caso de abrir de forma correcta la base de datos
         if (bd!=null) {
-            //Introducimos 3 clientes de ejemplo
-            for (int cont=1; cont<=3; cont++) {
-                //Creamos los datos
-                int codigo = cont;
-                String nombre = "Cliente" + cont;
-                String telefono = cont + "XXXXXXX";
-
-                //Introducimos los datos en la tabla Clientes
-				bd.execSQL("INSERT INTO Clientes (codigo, nombre, telefono) " +
-						"VALUES (" + codigo + ", '" + nombre + "', '" + telefono + "')");
-            }
-
-        		//Insertar un registro
-				//bd.execSQL("INSERT INTO Clientes (nombre, telefono) VALUES ('cli1','11111') ");
-				bd.execSQL("INSERT INTO Clientes (nombre, telefono) VALUES ('oscar','56565') ");
-        		//Actualizar un registro
-        		bd.execSQL("UPDATE Clientes SET telefono='00000' WHERE nombre='cli1' ");
-        		//Eliminar un registro
-        		//bd.execSQL("DELETE FROM Clientes WHERE nombre='cli1' ");
-
         		//Ejemplo de utilización del método insert()
         		//Creamos el registro que queremos insertar utilizando un objeto ContentValues
         		ContentValues nuevoRegistro = new ContentValues();
@@ -76,10 +56,12 @@ public class MainActivity extends AppCompatActivity {
         		String[] args3 = new String[]{"oscaryny"};
         		//Cursor c = bd.rawQuery("SELECT nombre,telefono FROM Clientes WHERE nombre=? ", args3);
 				Cursor c = bd.rawQuery("SELECT nombre,telefono FROM Clientes ",null);
-				bd.execSQL("Drop database DBClientes");
+				//bd.execSQL("Drop database DBClientes");
         		//Ejemplo Select2
         		String[] campos = new String[] {"nombre", "telefono"};
         		String[] args4 = new String[] {"cli1"};
+
+
         		//Cursor c = bd.query("Clientes", campos, "nombre=?", args4, null, null, null);
         		//Nos aseguramos de que exista al menos un registro
         		if (c.moveToFirst()) {
