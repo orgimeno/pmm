@@ -1,9 +1,11 @@
 package com.example.user.peliculasdb;
 
+import java.io.Serializable;
+
 /**
  * Created by mati on 8/02/16.
  */
-public class Pelicula {
+public class Pelicula implements Serializable {
 
     private int id;
     private String author;

@@ -1,12 +1,16 @@
 package com.example.user.peliculasdb;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -22,6 +27,8 @@ public class MainActivity extends Activity {
     private Button enviar;
     private  ListView listTree;
     private PeliculasDbHelper pelisHelper;
+
+    private ArrayList <Pelicula> peliculas = new ArrayList<Pelicula>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -90,18 +97,19 @@ public class MainActivity extends Activity {
 
     public  void showPelis(){
         List<Pelicula> listPeliculas = pelisHelper.listPeliculas();
-        String[] peliculas = new String[listPeliculas.size()];
+        String [] peliculasString = new String[listPeliculas.size()];
         int i = 0;
 
         for (Pelicula p : listPeliculas) {
             String registry = "Author: " + p.getAuthor() + ", Nombre: " + p.getName();
-            peliculas[i] = registry;
-            registerForContextMenu(registry);
+            peliculasString[i] = registry;
+            peliculas.add(p);
             i++;
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, peliculas);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, peliculasString);
         listTree = (ListView) findViewById(R.id.listPelis);
         listTree.setAdapter(adapter);
+        registerForContextMenu(listTree);
     }
 
     @Override
@@ -109,23 +117,35 @@ public class MainActivity extends Activity {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_contextual, menu);
+        inflater.inflate(R.menu.menu_context, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        Intent intentMain;
+        Intent intent;
+        AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+        int idItem=peliculas.get(index).getId();
         switch (item.getItemId()) {
-            case R.id.menu_context1:
-                intentMain = new Intent(pedidoActivity.this ,informacionActivity.class);
-                startActivity(intentMain);
+            case R.id.opBorrar:
+                pelisHelper.deleteItem(idItem);
+                showPelis();
                 return true;
-            case R.id.menu_context2:
-                intentMain = new Intent(pedidoActivity.this ,MapsActivity.class);
-                startActivity(intentMain);
+            case R.id.opUpdate:
+                intent = new Intent(MainActivity.this ,update.class);
+                Bundle data = new Bundle();
+                data.putSerializable("pelicula", peliculas.get(index));
+                intent.putExtras(data);
+                startActivity(intent);
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
+
+    public void changeToUpdate(){
+
+    }
+
+
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Pelicula pl = new Pelicula();
+                pl.setId(c.getInt(c.getColumnIndex("id")));
                 pl.setName(c.getString(c.getColumnIndex("nombre")));
                 pl.setAuthor(c.getString(c.getColumnIndex("autor")));
                 peliculas.add(pl);
@@ -65,6 +67,21 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
         }
 
         return peliculas;
+    }
+
+    public void deleteItem(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM peliculas WHERE id=" + id);
+    }
+
+    public void updateItem(Pelicula peli){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("nombre",peli.getName());
+        valores.put("autor",peli.getAuthor());
+
+        //Actualizamos el registro en la base de datos
+        db.update("peliculas", valores, "id=" + peli.getId(), null);
     }
 
 }
