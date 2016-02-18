@@ -58,6 +58,11 @@
                 android:id="@+id/autorInput"
                 android:layout_weight="1" />
 
+            <Spinner
+                android:id="@+id/spinnerGenero"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
         <Button
             android:layout_width="wrap_content"

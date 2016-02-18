@@ -11,15 +11,20 @@ public class Pelicula implements Serializable {
     private String author;
     private String name;
 
-    public Pelicula(int id, String author, String name) {
+
+    private int genero;
+
+    public Pelicula(int id, String author, String name, int genero) {
         this.id = id;
         this.author = author;
         this.name = name;
+        this.genero = genero;
     }
 
-    public Pelicula(String author, String name) {
+    public Pelicula(String author, String name, int genero) {
         this.author = author;
         this.name = name;
+        this.genero = genero;
     }
 
     public Pelicula() {
@@ -49,4 +54,13 @@ public class Pelicula implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getGenero() {
+        return genero;
+    }
+
+    public void setGenero(int genero) {
+        this.genero = genero;
+    }
+
 }

@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class update extends Activity {
@@ -29,6 +31,16 @@ public class update extends Activity {
         enviar1 = (Button)  findViewById(R.id.enviar1);
         name = (EditText) findViewById(R.id.nombreInput1);
         author = (EditText) findViewById(R.id.autorInput1);
+
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerGenero);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinnerGenero, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
         name.setText(pelicula.getName());
         author.setText(pelicula.getAuthor());

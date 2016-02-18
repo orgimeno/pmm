@@ -19,7 +19,14 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
             "  `id` INTEGER NOT NULL PRIMARY KEY," +
             "  `author` TEXT NOT NULL," +
             "  `name` TEXT NOT NULL" +
+            "  `genero` INTEGER NOT NULL" +
+            "  ); " +
+            "CREATE TABLE `generos` (" +
+            "  `id` INTEGER NOT NULL PRIMARY KEY," +
+            "  `name` TEXT NOT NULL," +
             "  );";
+
+    String sqlInsert = "Insert into generos set(name) values ('horror')";
 
     //TODO more tables
 
@@ -32,6 +39,7 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(sqlCreate);
+        db.execSQL(sqlInsert);
     }
 
     @Override
@@ -45,11 +53,31 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
 
         values.put("nombre", peli.getName());
         values.put("autor", peli.getAuthor());
+        values.put("genero", peli.getGenero());
         db.insert("peliculas", null, values);
 
     }
 
     public List<Pelicula> listPeliculas() {
+        List<Pelicula> peliculas = new ArrayList<Pelicula>();
+        String selectQuery = "SELECT  * FROM peliculas";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()) {
+            do {
+                Pelicula pl = new Pelicula();
+                pl.setId(c.getInt(c.getColumnIndex("id")));
+                pl.setName(c.getString(c.getColumnIndex("nombre")));
+                pl.setAuthor(c.getString(c.getColumnIndex("autor")));
+                peliculas.add(pl);
+            } while (c.moveToNext());
+        }
+
+        return peliculas;
+    }
+    public List<Generos> listGeneros() {
         List<Pelicula> peliculas = new ArrayList<Pelicula>();
         String selectQuery = "SELECT  * FROM peliculas";
 
