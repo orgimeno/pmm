@@ -53,7 +53,7 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
 
         values.put("nombre", peli.getName());
         values.put("autor", peli.getAuthor());
-        values.put("genero", peli.getGenero());
+        values.put("genero", peli.getGenero().getId());
         db.insert("peliculas", null, values);
 
     }
@@ -78,23 +78,22 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
         return peliculas;
     }
     public List<Generos> listGeneros() {
-        List<Pelicula> peliculas = new ArrayList<Pelicula>();
-        String selectQuery = "SELECT  * FROM peliculas";
+        List<Generos> generos = new ArrayList<Generos>();
+        String selectQuery = "SELECT  * FROM generos";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
 
         if (c.moveToFirst()) {
             do {
-                Pelicula pl = new Pelicula();
-                pl.setId(c.getInt(c.getColumnIndex("id")));
-                pl.setName(c.getString(c.getColumnIndex("nombre")));
-                pl.setAuthor(c.getString(c.getColumnIndex("autor")));
-                peliculas.add(pl);
+                Generos gn = new Generos();
+                gn.setId(c.getInt(c.getColumnIndex("id")));
+                gn.setName(c.getString(c.getColumnIndex("nombre")));
+                generos.add(gn);
             } while (c.moveToNext());
         }
 
-        return peliculas;
+        return generos;
     }
 
     public void deleteItem(int id){
