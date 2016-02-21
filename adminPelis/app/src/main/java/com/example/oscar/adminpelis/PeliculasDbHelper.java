@@ -39,6 +39,17 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
         inserGenero(db, new Generos("Horror"));
         inserGenero(db, new Generos("Comedia"));
         inserGenero(db, new Generos("Thriller"));
+        inserGenero(db, new Generos("Drama"));
+        inserGenero(db, new Generos("Acción"));
+        inserGenero(db, new Generos("Aventura"));
+        inserGenero(db, new Generos("Romántico"));
+        inserGenero(db, new Generos("Ciencia Ficción"));
+        inserGenero(db, new Generos("Musical"));
+        inserGenero(db, new Generos("Fantasía"));
+        inserGenero(db, new Generos("Bélico"));
+        inserGenero(db, new Generos("Zombies"));
+        inserGenero(db, new Generos("Deportivo"));
+        inserGenero(db, new Generos("Infantil"));
     }
 
     @Override

@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -112,8 +112,7 @@
                 android:id="@+id/vistoCheckBox"
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:textColor="#d35400"
-                android:clickable="false" />
+                android:textColor="#d35400"/>
 
 
         </LinearLayout>
@@ -130,4 +129,4 @@
             android:background="#34495e" />
     </LinearLayout>
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
