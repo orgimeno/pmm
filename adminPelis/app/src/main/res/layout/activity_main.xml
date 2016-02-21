@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="#CECECE">
+        android:background="#bdc3c7">
 
 
         <TextView
@@ -23,7 +23,8 @@
             android:id="@+id/titulo"
             android:layout_gravity="center_horizontal"
             android:textStyle="bold"
-            android:textSize="50dp" />
+            android:textSize="50dp"
+            android:textColor="#c0392b" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -37,13 +38,15 @@
                 android:text="Nombre:"
                 android:id="@+id/nombreText"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="#34495e" />
 
             <EditText
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/nombreInput"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="#d35400" />
 
         </LinearLayout>
 
@@ -60,13 +63,15 @@
                 android:text="Director:"
                 android:id="@+id/autorText"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="#34495e" />
 
             <EditText
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/autorInput"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="#d35400" />
 
         </LinearLayout>
 
@@ -83,7 +88,8 @@
                 android:text="Genero:"
                 android:id="@+id/genreText"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="#34495e" />
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -105,7 +111,9 @@
                 android:text="La he visto"
                 android:id="@+id/vistoCheckBox"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="#d35400"
+                android:clickable="false" />
 
 
         </LinearLayout>
@@ -117,7 +125,9 @@
             android:text="Guardar"
             android:id="@+id/enviar"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp" />
+            android:layout_marginTop="60dp"
+            android:textColor="#ecf0f1"
+            android:background="#34495e" />
     </LinearLayout>
 
 </RelativeLayout>

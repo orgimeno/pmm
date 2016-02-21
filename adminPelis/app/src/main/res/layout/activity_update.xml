@@ -13,65 +13,84 @@
         android:id="@+id/formPeli"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:background="#CECECE">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Formulario de Mi VideoClub"
-            android:id="@+id/titulo" />
+            android:text="Mi VideoClub"
+            android:id="@+id/titulo"
+            android:textStyle="bold"
+            android:textSize="50dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#c0392b" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:padding="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Nombre:"
-                android:id="@+id/nombreText" />
+                android:id="@+id/nombreText"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#34495e" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/nombreInput1"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="#d35400" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Autor:"
-                android:id="@+id/autorText" />
+                android:id="@+id/autorText"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#34495e" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/autorInput1"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="#d35400" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Genero:"
-                android:id="@+id/genreText1" />
+                android:id="@+id/genreText1"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#34495e" />
 
             <Spinner
                 android:layout_width="match_parent"
@@ -82,14 +101,19 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:padding="5dp">
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="La he visto"
-                android:id="@+id/vistoCheckBoxUpdate" />
+                android:id="@+id/vistoCheckBoxUpdate"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                android:textColor="#d35400" />
 
 
         </LinearLayout>
@@ -98,7 +122,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Actualizar"
-            android:id="@+id/enviar1"/>
+            android:id="@+id/enviar1"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:background="#34495e"
+            android:textColor="#ecf0f1" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
