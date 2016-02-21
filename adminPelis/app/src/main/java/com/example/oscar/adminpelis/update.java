@@ -22,7 +22,6 @@ import java.util.List;
 public class update extends Activity {
     private EditText name, author;
     private Button enviar1;
-    private ListView listTree;
     private PeliculasDbHelper pelisHelper;
     private Pelicula peli;
     private Spinner genreSpinner;

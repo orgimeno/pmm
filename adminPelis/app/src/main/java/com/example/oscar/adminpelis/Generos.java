@@ -10,7 +10,7 @@ public class Generos implements Serializable{
     private int id;
     private String name;
 
-    public Generos(int id, String name) {
+    public Generos(int id,String name) {
         this.name = name;
         this.id = id;
     }

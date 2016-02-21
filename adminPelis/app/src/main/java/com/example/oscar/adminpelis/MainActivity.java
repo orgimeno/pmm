@@ -136,6 +136,7 @@ public class MainActivity extends Activity {
         AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int index = info.position;
         int idItem=peliculas.get(index).getId();
+        Bundle data = new Bundle();
         switch (item.getItemId()) {
             case R.id.opBorrar:
                 pelisHelper.deleteItem(idItem);
@@ -143,7 +144,12 @@ public class MainActivity extends Activity {
                 return true;
             case R.id.opUpdate:
                 intent = new Intent(MainActivity.this ,update.class);
-                Bundle data = new Bundle();
+                data.putSerializable("pelicula", peliculas.get(index));
+                intent.putExtras(data);
+                startActivity(intent);
+                return true;
+            case R.id.opVer:
+                intent = new Intent(MainActivity.this ,view.class);
                 data.putSerializable("pelicula", peliculas.get(index));
                 intent.putExtras(data);
                 startActivity(intent);

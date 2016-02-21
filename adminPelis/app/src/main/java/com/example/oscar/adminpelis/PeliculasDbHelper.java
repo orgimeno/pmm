@@ -111,6 +111,24 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
         return generos;
     }
 
+    public Generos findGenero(int id){
+        String selectQuery = "SELECT  * FROM generos where _id = "+id;
+        Generos gn = new Generos();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()) {
+            do {
+                gn = new Generos();
+                gn.setId(c.getInt(c.getColumnIndex("_id")));
+                gn.setName(c.getString(c.getColumnIndex("name")));
+            } while (c.moveToNext());
+        }
+
+        return gn;
+    }
+
     public void deleteItem(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM peliculas WHERE _id=" + id);
