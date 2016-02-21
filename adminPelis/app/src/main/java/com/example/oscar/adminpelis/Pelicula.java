@@ -11,33 +11,27 @@ public class Pelicula implements Serializable {
     private String author;
     private String name;
 
+    private int visto;
+
     private int genero;
 
-    public Pelicula(int id, String author, String name, int genero) {
+    public Pelicula(int id, String author, String name, int genero, int visto) {
         this.id = id;
         this.author = author;
         this.name = name;
         this.genero = genero;
+        this.visto = visto;
     }
 
-    /*public Pelicula(int id, String author, String name) {
-        this.id = id;
-        this.author = author;
-        this.name = name;
-    }*/
-
-    public Pelicula(String author, String name, int genero) {
+    public Pelicula(String author, String name, int genero, int visto) {
         this.author = author;
         this.name = name;
         this.genero = genero;
+        this.visto = visto;
     }
-
-    /*public Pelicula(String author, String name) {
-        this.author = author;
-        this.name = name;
-    }*/
 
     public Pelicula() {
+
     }
 
     //GET and SET
@@ -71,6 +65,14 @@ public class Pelicula implements Serializable {
 
     public void setGenero(int genero) {
         this.genero = genero;
+    }
+
+    public int getVisto() {
+        return visto;
+    }
+
+    public void setVisto(int visto) {
+        this.visto = visto;
     }
 
 }

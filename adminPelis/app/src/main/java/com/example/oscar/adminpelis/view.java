@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class view extends AppCompatActivity {
 
-    private TextView name, author, generoText;
+    private TextView name, author, generoText, vistaText;
     private Button volver;
     private PeliculasDbHelper pelisHelper;
     private Pelicula peli;
@@ -32,9 +32,16 @@ public class view extends AppCompatActivity {
         name = (TextView) findViewById(R.id.vistaNombre);
         author = (TextView) findViewById(R.id.vistaAutor);
         generoText = (TextView) findViewById(R.id.vistaGenero);
+        vistaText = (TextView) findViewById(R.id.vistaVisto);
 
         name.setText(pelicula.getName());
         author.setText(pelicula.getAuthor());
+
+        if(pelicula.getVisto() == 1){
+            vistaText.setText(" Sí");
+        }else {
+            vistaText.setText(" No");
+        }
 
         generoText.setText(pelisHelper.findGenero(pelicula.getGenero()).getName());
 

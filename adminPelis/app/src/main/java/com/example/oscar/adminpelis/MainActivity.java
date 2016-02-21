@@ -15,6 +15,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -30,6 +31,7 @@ public class MainActivity extends Activity {
     private EditText name, author;
     private Button enviar;
     private Spinner genreSpinner;
+    private CheckBox visto;
     private SimpleCursorAdapter genreSpinnerAdapter;
     private ListView listTree;
     private int idGenero;
@@ -52,12 +54,12 @@ public class MainActivity extends Activity {
 
         TabHost.TabSpec spec = tabs.newTabSpec("mitab1");
         spec.setContent(R.id.formPeli);
-        spec.setIndicator("nueva pelicula");
+        spec.setIndicator("Nueva pelicula");
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("mitab2");
         spec.setContent(R.id.listPelisTab);
-        spec.setIndicator("listar peliculas");
+        spec.setIndicator("Listar peliculas");
         tabs.addTab(spec);
 
         tabs.setCurrentTab(0);
@@ -67,11 +69,19 @@ public class MainActivity extends Activity {
         name = (EditText) findViewById(R.id.nombreInput);
         author = (EditText) findViewById(R.id.autorInput);
         setSpinner();
+        visto = (CheckBox)findViewById(R.id.vistoCheckBox);
+
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Generos genero = new Generos(idGenero,textGenero);
-                Pelicula peli = new Pelicula(author.getText().toString(),name.getText().toString(), idGenero);
+                int vistoInt;
+
+                if(visto.isChecked())
+                    vistoInt = 1;
+                else
+                    vistoInt = 0;
+
+                Pelicula peli = new Pelicula(author.getText().toString(),name.getText().toString(), idGenero, vistoInt);
                 pelisHelper.inserPelicula(peli);
                 showPelis();
                 tabs.setCurrentTab(1);
@@ -111,11 +121,12 @@ public class MainActivity extends Activity {
         int i = 0;
 
         for (Pelicula p : listPeliculas) {
-            String registry = "Author: " + p.getAuthor() + ", Nombre: " + p.getName();
+            String registry = "Director: " + p.getAuthor() + ", Nombre: " + p.getName();
             peliculasString[i] = registry;
             peliculas.add(p);
             i++;
         }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, peliculasString);
         listTree = (ListView) findViewById(R.id.listPelis);
         listTree.setAdapter(adapter);

@@ -17,8 +17,9 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
     //Sentencia SQL para crear la tabla de Destinos
     String sqlPeliculas = "CREATE TABLE `peliculas` (" +
             "  `_id` INTEGER NOT NULL PRIMARY KEY," +
-            "  `author` TEXT NOT NULL," +
+            "  `author` TEXT NULL," +
             "  `name` TEXT NOT NULL," +
+            "  `vista` INTEGER NOT NULL," +
             "  `genero` INTEGER NOT NULL," +
             " FOREIGN KEY(genero) REFERENCES generos(_id)" +
             "  ); ";
@@ -52,6 +53,7 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
         values.put("name", peli.getName());
         values.put("author", peli.getAuthor());
         values.put("genero", peli.getGenero());
+        values.put("vista", peli.getVisto());
         db.insert("peliculas", null, values);
 
     }
@@ -77,6 +79,7 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
                 pl.setName(c.getString(c.getColumnIndex("name")));
                 pl.setAuthor(c.getString(c.getColumnIndex("author")));
                 pl.setGenero(c.getInt(c.getColumnIndex("genero")));
+                pl.setVisto(c.getInt(c.getColumnIndex("vista")));
                 peliculas.add(pl);
             } while (c.moveToNext());
         }
@@ -85,6 +88,7 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
     }
 
     public Cursor returnGeneros(){
+
         String selectQuery = "SELECT  * FROM generos";
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -140,6 +144,7 @@ public class PeliculasDbHelper extends SQLiteOpenHelper {
         valores.put("name",peli.getName());
         valores.put("author",peli.getAuthor());
         valores.put("genero",peli.getGenero());
+        valores.put("vista",peli.getVisto());
 
         //Actualizamos el registro en la base de datos
         db.update("peliculas", valores, "_id=" + peli.getId(), null);

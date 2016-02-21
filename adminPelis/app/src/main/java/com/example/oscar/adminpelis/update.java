@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -24,6 +25,7 @@ public class update extends Activity {
     private Button enviar1;
     private PeliculasDbHelper pelisHelper;
     private Pelicula peli;
+    private CheckBox visto;
     private Spinner genreSpinner;
     private SimpleCursorAdapter genreSpinnerAdapter;
     private Generos genero;
@@ -43,17 +45,29 @@ public class update extends Activity {
         enviar1 = (Button)  findViewById(R.id.enviar1);
         name = (EditText) findViewById(R.id.nombreInput1);
         author = (EditText) findViewById(R.id.autorInput1);
+        visto = (CheckBox)findViewById(R.id.vistoCheckBoxUpdate);
 
         name.setText(pelicula.getName());
         author.setText(pelicula.getAuthor());
 
-        setSpinner(pelicula);
+        if(pelicula.getVisto() == 1){
+            visto.setChecked(true);
+        }else {
+            visto.setChecked(false);
+        }
 
+        setSpinner(pelicula);
         enviar1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int vistoInt;
 
-                peli = new Pelicula(pelicula.getId(), author.getText().toString(), name.getText().toString(), idGenero);
+                if(visto.isChecked())
+                    vistoInt = 1;
+                else
+                    vistoInt = 0;
+
+                peli = new Pelicula(pelicula.getId(), author.getText().toString(), name.getText().toString(), idGenero, vistoInt);
                 pelisHelper.updateItem(peli);
                 startActivity(intent);
             }
