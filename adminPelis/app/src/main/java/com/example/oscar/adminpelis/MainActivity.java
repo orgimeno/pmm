@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,7 +31,9 @@ public class MainActivity extends Activity {
     private Button enviar;
     private Spinner genreSpinner;
     private SimpleCursorAdapter genreSpinnerAdapter;
-    private  ListView listTree;
+    private ListView listTree;
+    private int idGenero;
+    private String textGenero;
     private PeliculasDbHelper pelisHelper;
 
     private ArrayList <Pelicula> peliculas = new ArrayList<Pelicula>();
@@ -62,10 +66,12 @@ public class MainActivity extends Activity {
         enviar = (Button)  findViewById(R.id.enviar);
         name = (EditText) findViewById(R.id.nombreInput);
         author = (EditText) findViewById(R.id.autorInput);
+        setSpinner();
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Pelicula peli = new Pelicula(author.getText().toString(),name.getText().toString());
+                Generos genero = new Generos(idGenero,textGenero);
+                Pelicula peli = new Pelicula(author.getText().toString(),name.getText().toString(), idGenero);
                 pelisHelper.inserPelicula(peli);
                 showPelis();
                 tabs.setCurrentTab(1);
@@ -148,11 +154,11 @@ public class MainActivity extends Activity {
     }
 
     public void setSpinner(){
+        final List <Generos> generos = pelisHelper.listGeneros();
         genreSpinner = (Spinner)findViewById(R.id.GenreSpinner);
         genreSpinnerAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_spinner_item,//Layout simple
-                pelisHelper.returnGeneros(),
-                //dataSource.getAllGenres(),//Todos los registros
+                pelisHelper.returnGeneros(),//Todos los registros
                 new String[]{"name"},//Mostrar solo el nombre
                 new int[]{android.R.id.text1},//View para el nombre
                 SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);//Observer para el refresco
@@ -161,10 +167,19 @@ public class MainActivity extends Activity {
          */
         genreSpinner.setAdapter(genreSpinnerAdapter);
 
-        /*
-        Relacionado la escucha de selección de GenreSpinner
-         */
-        //genreSpinner.setOnItemSelectedListener(this);
+        genreSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                idGenero = generos.get(position).getId();
+                textGenero = generos.get(position).getName();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
     }
 
     public void changeToUpdate(){

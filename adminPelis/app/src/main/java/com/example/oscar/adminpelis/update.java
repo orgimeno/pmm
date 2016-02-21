@@ -3,12 +3,18 @@ package com.example.oscar.adminpelis;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
+
+import java.util.List;
 
 /**
  * Created by Oscar on 20/02/2016.
@@ -19,6 +25,11 @@ public class update extends Activity {
     private ListView listTree;
     private PeliculasDbHelper pelisHelper;
     private Pelicula peli;
+    private Spinner genreSpinner;
+    private SimpleCursorAdapter genreSpinnerAdapter;
+    private Generos genero;
+    private int idGenero;
+    private String textGenero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,41 +39,76 @@ public class update extends Activity {
         final Pelicula pelicula = (Pelicula) dataLoad.getSerializable("pelicula");
         final Intent intent = new Intent(this, MainActivity.class);
         //  Activity form
+        pelisHelper = new PeliculasDbHelper(this, "PeliculasDB", null, 1);
+
         enviar1 = (Button)  findViewById(R.id.enviar1);
         name = (EditText) findViewById(R.id.nombreInput1);
         author = (EditText) findViewById(R.id.autorInput1);
 
-
-        /*Spinner spinner = (Spinner) findViewById(R.id.spinnerGenero);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.spinnerGenero, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);*/
-
         name.setText(pelicula.getName());
         author.setText(pelicula.getAuthor());
-        pelisHelper = new PeliculasDbHelper(this, "PeliculasDB", null, 1);
+
+        setSpinner(pelicula);
+
         enviar1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                peli = new Pelicula(pelicula.getId(), author.getText().toString(), name.getText().toString());
+                peli = new Pelicula(pelicula.getId(), author.getText().toString(), name.getText().toString(), idGenero);
                 pelisHelper.updateItem(peli);
                 startActivity(intent);
             }
         });
-        /*enviar1.setOnClickListener(new View.OnClickListener() {
+    }
+
+    public void setSpinner(Pelicula pelicula){
+        final List<Generos> generos = pelisHelper.listGeneros();
+        Generos genero = new Generos(69, "fail");
+        genreSpinner = (Spinner)findViewById(R.id.GenreSpinnerUpdate);
+        genreSpinnerAdapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_spinner_item,//Layout simple
+                pelisHelper.returnGeneros(),//Todos los registros
+                new String[]{"name"},//Mostrar solo el nombre
+                new int[]{android.R.id.text1},//View para el nombre
+                SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);//Observer para el refresco
+        /*
+        Seteando Adaptador de GenreSpinner
+         */
+        genreSpinner.setAdapter(genreSpinnerAdapter);
+        for (int i = 0; i<generos.size();i++){
+            if(generos.get(i).getId() == pelicula.getGenero())
+                genero = new Generos (generos.get(i).getId(), generos.get(i).getName());
+        }
+        //genreSpinner.setSelection(getIndex(genreSpinner, genero.getName()));
+        genreSpinner.setSelection(genero.getId()-1);
+
+        genreSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(update.this, name.getText() + "", Toast.LENGTH_SHORT).show();
-                peli = new Pelicula(pelicula.getId(), author.getText().toString(), name.getText().toString());
-                Toast.makeText(update.this, peli.getId() + "", Toast.LENGTH_SHORT).show();
-                pelisHelper.updateItem();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                idGenero = generos.get(position).getId();
+                textGenero = generos.get(position).getName();
             }
-        });*/
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }else {
+                Log.v(myString+"bbbbbbb", spinner.getItemAtPosition(i)+" aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            }
+        }
+        return index;
     }
 
     @Override
