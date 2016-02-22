@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
         int i = 0;
 
         for (Pelicula p : listPeliculas) {
-            String registry = "Director: " + p.getAuthor() + ", Nombre: " + p.getName();
+            String registry = "Director: " + p.getAuthor() + "\nNombre: " + p.getName();
             peliculasString[i] = registry;
             peliculas.add(p);
             i++;
